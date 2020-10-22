@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-cookie-banner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Settings dialog and framework to handle the German and EU law (may 2020) about cookies in a website",
   "main": "index.js",
   "scripts": {
