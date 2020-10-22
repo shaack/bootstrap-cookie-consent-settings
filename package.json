@@ -1,0 +1,26 @@
+{
+  "name": "bootstrap-cookie-banner",
+  "version": "1.0.0",
+  "description": "Settings dialog and framework to handle the German and EU law (may 2020) about cookies in a website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shaack/bootstrap-cookie-banner.git"
+  },
+  "keywords": [
+    "bootstrap",
+    "cookie",
+    "eu",
+    "gdpr",
+    "dsgvo"
+  ],
+  "author": "Stefan Haack (shaack.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shaack/bootstrap-cookie-banner/issues"
+  },
+  "homepage": "https://github.com/shaack/bootstrap-cookie-banner#readme"
+}
