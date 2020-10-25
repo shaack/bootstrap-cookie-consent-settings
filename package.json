@@ -1,10 +1,10 @@
 {
   "name": "bootstrap-cookie-banner",
   "version": "1.0.1",
-  "description": "Settings dialog and framework to handle the German and EU law (may 2020) about cookies in a website",
-  "main": "index.js",
+  "description": "Settings dialog in Bootstrap 4 and framework to handle the German and EU law (may 2020) about cookies in a website",
+  "browser": "./src/bootstrap-cookie-banner.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"No test specified\""
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,5 @@
   "bugs": {
     "url": "https://github.com/shaack/bootstrap-cookie-banner/issues"
   },
-  "homepage": "https://github.com/shaack/bootstrap-cookie-banner#readme"
+  "homepage": "https://shaack.com"
 }

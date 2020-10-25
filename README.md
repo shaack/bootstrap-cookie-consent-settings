@@ -1,3 +1,3 @@
-# bootstrap-cookie-consent-tools
+# bootstrap-cookie-banner
 
 coming soon...
