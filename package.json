@@ -22,5 +22,6 @@
   "bugs": {
     "url": "https://github.com/shaack/bootstrap-cookie-banner/issues"
   },
-  "homepage": "https://shaack.com"
+  "homepage": "https://shaack.com",
+  "main": "./src/bootstrap-cookie-banner.js"
 }
