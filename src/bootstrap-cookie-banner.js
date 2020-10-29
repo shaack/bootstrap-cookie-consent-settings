@@ -13,7 +13,8 @@ function BootstrapCookieBanner(props) {
         lang: navigator.language, // the language, in which the modal is shown
         languages: ["en", "de"], // supported languages (in ./content/), defaults to first in array
         contentURL: "./content/", // must contain the dialogs content in the wanted languages
-        cookieName: "cookie-consent-settings"  // the name of the cookie, the cookie is `true` if tracking was accepted
+        cookieName: "cookie-consent-settings",  // the name of the cookie, the cookie is `true` if tracking was accepted
+        cookieStorageDays: 365
     }
     for (var property in props) {
         // noinspection JSUnfilteredForInLoop
@@ -73,6 +74,7 @@ function BootstrapCookieBanner(props) {
                 self.modal.setAttribute("role", "dialog")
                 self.modal.setAttribute("aria-labelledby", modalId)
                 document.body.append(self.modal)
+                self.$modal = $(self.modal)
                 // load content
                 var templateUrl = self.props.contentURL + self.lang + ".html"
                 $.get(templateUrl)
@@ -87,7 +89,7 @@ function BootstrapCookieBanner(props) {
                         self.$buttonSave = $("#bcb-buttonSave")
                         self.$buttonAgreeAll = $("#bcb-buttonAgreeAll")
                         updateButtons()
-                        $("#bcb-settings").on("hide.bs.collapse", function () {
+                        $("#bcb-options").on("hide.bs.collapse", function () {
                             detailedSettingsShown = false
                             updateButtons()
                         }).on("show.bs.collapse", function () {
@@ -112,7 +114,7 @@ function BootstrapCookieBanner(props) {
                         console.error("see documentation at https://github.com/shaack/bootstrap-cookie-banner")
                     })
             } else {
-                $(self.modal).modal("show")
+                self.$modal.modal("show")
             }
         }.bind(this))
     }
@@ -131,16 +133,44 @@ function BootstrapCookieBanner(props) {
         }
     }
 
-    function agreeAll() {
+    function gatherOptions(setAllExceptNecessary) {
+        var $options = self.$modal.find("#bcb-options .bcb-option")
+        var options = {}
+        for (var i = 0; i < $options.length; i++) {
+            var option = $options[i]
+            var name = option.getAttribute("data-name")
+            if(setAllExceptNecessary === undefined) {
+                var $checkbox = $(option).find("input[type='checkbox']")
+                options[name] = $checkbox.prop("checked")
+            } else {
+                options[name] = !!setAllExceptNecessary
+            }
+        }
+        return options;
+    }
 
+    function agreeAll() {
+        Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays)
+        self.$modal.modal("hide")
+        self.$modal.on("hidden.bs.modal", function() {
+            location.reload()
+        })
     }
 
     function doNotAgree() {
-
+        Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays)
+        self.$modal.modal("hide")
+        self.$modal.on("hidden.bs.modal", function() {
+            location.reload()
+        })
     }
 
     function saveSettings() {
-
+        Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays)
+        self.$modal.modal("hide")
+        self.$modal.on("hidden.bs.modal", function() {
+            location.reload()
+        })
     }
 
     // "constructor"
@@ -151,10 +181,10 @@ function BootstrapCookieBanner(props) {
 
     // API
 
-    this.showSettings = function () {
+    this.showSettingsDialog = function () {
         showSettings()
     }
-    this.getTrackingConfig = function () {
-
+    this.getSettings = function () {
+        return Cookie.get(self.props.cookieName)
     }
 }

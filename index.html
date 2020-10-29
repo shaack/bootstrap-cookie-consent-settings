@@ -9,21 +9,38 @@
 </head>
 <body>
 <div class="container">
-    <h1>bootstrap-cookie-banner "BCB" demo page</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet dicta dolores, laborum laudantium nihil obcaecati
-        perspiciatis repellat veritatis? Animi consequatur dolorem esse explicabo fugit harum impedit iure molestiae
-        placeat repellendus.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi, consequuntur cum distinctio dolorem earum
-        facere illum inventore iusto mollitia nostrum odio pariatur quae quaerat rem repellat sapiente sint vel?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus cumque dolor, ea eligendi, eos error est
-        eveniet expedita fuga iusto magni minus obcaecati possimus quaerat quam quasi sed tenetur.
+    <h1 class="mt-5">bootstrap-cookie-banner "BCB" demo page</h1>
+    <h3>Show Banner</h3>
+    <p>
+        Show the Banner with
+        <code>`cookieBanner.showSettingsDialog()`</code>
     </p>
+    <p>
+        <a href="javascript:showSettingsDialog()" class="btn btn-primary">Cookie Settings</a>
+    </p>
+    <h3>Read settings</h3>
+    <p>Read the cookie settings with <code>cookieBanner.getSettings()</code></p>
+    <p>Current settings:</p>
+    <div class="card">
+        <div class="card-body">
+            <pre class="mb-0" id="settingsOutput"></pre>
+        </div>
+    </div>
 </div>
 <script src="src/bootstrap-cookie-banner.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script>
-    var cookieBanner = new BootstrapCookieBanner()
+    var cookieBanner = new BootstrapCookieBanner({lang: "de"})
+
+    function showSettingsDialog() {
+        cookieBanner.showSettingsDialog()
+    }
+
+    $(document).ready(function () {
+        $("#settingsOutput").text(cookieBanner.getSettings())
+    })
+
 </script>
 </body>
 </html>
