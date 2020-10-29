@@ -1,5 +1,5 @@
 {
-  "name": "bootstrap-cookie-banner",
+  "name": "bootstrap-cookie-consent-settings",
   "version": "1.0.1",
   "description": "Settings dialog in Bootstrap 4 and framework to handle the German and EU law (may 2020) about cookies in a website",
   "browser": "./src/bootstrap-cookie-banner.js",
@@ -23,7 +23,7 @@
     "url": "https://github.com/shaack/bootstrap-cookie-banner/issues"
   },
   "homepage": "https://shaack.com",
-  "main": "./src/bootstrap-cookie-banner.js",
+  "main": "src/bootstrap-cookie-consent-settings.js",
   "dependencies": {
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",

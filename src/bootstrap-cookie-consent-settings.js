@@ -4,17 +4,17 @@
  * License: MIT, see file 'LICENSE'
  */
 
-function BootstrapCookieBanner(props) {
+function BootstrapCookieConsentSettings(props) {
     var modalId = "bcb-modal"
     var self = this
     var detailedSettingsShown = false
     this.props = {
-        autoShowDialog: true, // disable autoShowModal on the privacy policy and legal notice pages, to make that page readable
+        autoShowDialog: true, // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
         lang: navigator.language, // the language, in which the modal is shown
         languages: ["en", "de"], // supported languages (in ./content/), defaults to first in array
-        contentURL: "./content/", // must contain the dialogs content in the wanted languages
-        cookieName: "cookie-consent-settings",  // the name of the cookie, the cookie is `true` if tracking was accepted
-        cookieStorageDays: 365
+        contentURL: "./content/", // this URL must contain the dialogs content in the needed languages
+        cookieName: "cookie-consent-settings",  // the name of the cookie in which the configuration is stored as JSON
+        cookieStorageDays: 365 // the duration the cookie configuration is stored on the client
     }
     for (var property in props) {
         // noinspection JSUnfilteredForInLoop
@@ -63,7 +63,7 @@ function BootstrapCookieBanner(props) {
         }
     }
 
-    function showSettings() {
+    function showDialog() {
         Util.documentReady(function () {
             this.modal = document.getElementById(modalId)
             if (!self.modal) {
@@ -190,13 +190,13 @@ function BootstrapCookieBanner(props) {
     // init
 
     if (Cookie.get(this.props.cookieName) === undefined && this.props.autoShowDialog) {
-        showSettings()
+        showDialog()
     }
 
     // API
 
-    this.showSettingsDialog = function () {
-        showSettings()
+    this.showDialog = function () {
+        showDialog()
     }
     this.getSettings = function (optionName) {
         var settings = JSON.parse(Cookie.get(self.props.cookieName))
