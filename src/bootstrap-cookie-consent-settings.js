@@ -199,16 +199,20 @@ function BootstrapCookieConsentSettings(props) {
         showDialog()
     }
     this.getSettings = function (optionName) {
-        var settings = JSON.parse(Cookie.get(self.props.cookieName))
-        if(optionName === undefined) {
-            return settings
-        } else {
-            if(settings) {
-                return settings[optionName]
+        var cookie = Cookie.get(self.props.cookieName)
+        if(cookie) {
+            var settings = JSON.parse(Cookie.get(self.props.cookieName))
+            if (optionName === undefined) {
+                return settings
             } else {
-                return false
+                if (settings) {
+                    return settings[optionName]
+                } else {
+                    return false
+                }
             }
+        } else {
+            return undefined
         }
-
     }
 }
