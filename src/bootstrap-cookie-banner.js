@@ -89,6 +89,7 @@ function BootstrapCookieBanner(props) {
                         self.$buttonSave = $("#bcb-buttonSave")
                         self.$buttonAgreeAll = $("#bcb-buttonAgreeAll")
                         updateButtons()
+                        updateOptionsFromCookie()
                         $("#bcb-options").on("hide.bs.collapse", function () {
                             detailedSettingsShown = false
                             updateButtons()
@@ -119,6 +120,17 @@ function BootstrapCookieBanner(props) {
         }.bind(this))
     }
 
+    function updateOptionsFromCookie() {
+        var settings = self.getSettings()
+        if(settings) {
+            for (var setting in settings) {
+                var $checkbox = self.$modal.find("#bcb-options .bcb-option[data-name='" + setting + "'] input[type='checkbox']")
+                // noinspection JSUnfilteredForInLoop
+                $checkbox.prop("checked", settings[setting])
+            }
+        }
+    }
+
     function updateButtons() {
         if (detailedSettingsShown) {
             self.$buttonDoNotAgree.hide()
@@ -139,7 +151,9 @@ function BootstrapCookieBanner(props) {
         for (var i = 0; i < $options.length; i++) {
             var option = $options[i]
             var name = option.getAttribute("data-name")
-            if(setAllExceptNecessary === undefined) {
+            if(name === "necessary") {
+                options[name] = true
+            } else if(setAllExceptNecessary === undefined) {
                 var $checkbox = $(option).find("input[type='checkbox']")
                 options[name] = $checkbox.prop("checked")
             } else {
@@ -173,7 +187,7 @@ function BootstrapCookieBanner(props) {
         })
     }
 
-    // "constructor"
+    // init
 
     if (Cookie.get(this.props.cookieName) === undefined && this.props.autoShowDialog) {
         showSettings()
@@ -184,7 +198,17 @@ function BootstrapCookieBanner(props) {
     this.showSettingsDialog = function () {
         showSettings()
     }
-    this.getSettings = function () {
-        return Cookie.get(self.props.cookieName)
+    this.getSettings = function (optionName) {
+        var settings = JSON.parse(Cookie.get(self.props.cookieName))
+        if(optionName === undefined) {
+            return settings
+        } else {
+            if(settings) {
+                return settings[optionName]
+            } else {
+                return false
+            }
+        }
+
     }
 }

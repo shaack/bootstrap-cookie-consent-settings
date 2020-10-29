@@ -9,21 +9,25 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="mt-5">bootstrap-cookie-banner "BCB" demo page</h1>
-    <h3>Show Banner</h3>
+    <h1 class="mt-5 mb-4">bootstrap-cookie-banner demo page</h1>
+    <h2>Show Banner</h2>
     <p>
-        Show the Banner with
-        <code>`cookieBanner.showSettingsDialog()`</code>
+        Show the Banner with <code>cookieBanner.showSettingsDialog()</code>
     </p>
     <p>
         <a href="javascript:showSettingsDialog()" class="btn btn-primary">Cookie Settings</a>
     </p>
-    <h3>Read settings</h3>
-    <p>Read the cookie settings with <code>cookieBanner.getSettings()</code></p>
-    <p>Current settings:</p>
-    <div class="card">
+    <h2 class="mt-4">Read settings</h2>
+    <p>Read all cookie settings with <code>cookieBanner.getSettings()</code></p>
+    <div class="card mb-4">
         <div class="card-body">
             <pre class="mb-0" id="settingsOutput"></pre>
+        </div>
+    </div>
+    <p>Read a specific cookie setting with <code>cookieBanner.getSettings('analysis')</code></p>
+    <div class="card">
+        <div class="card-body">
+            <pre class="mb-0" id="settingsAnalysisOutput"></pre>
         </div>
     </div>
 </div>
@@ -38,9 +42,9 @@
     }
 
     $(document).ready(function () {
-        $("#settingsOutput").text(cookieBanner.getSettings())
+        $("#settingsOutput").text(JSON.stringify(cookieBanner.getSettings()))
+        $("#settingsAnalysisOutput").text(cookieBanner.getSettings("analysis"))
     })
-
 </script>
 </body>
 </html>
