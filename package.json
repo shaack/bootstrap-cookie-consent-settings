@@ -23,5 +23,10 @@
     "url": "https://github.com/shaack/bootstrap-cookie-banner/issues"
   },
   "homepage": "https://shaack.com",
-  "main": "./src/bootstrap-cookie-banner.js"
+  "main": "./src/bootstrap-cookie-banner.js",
+  "dependencies": {
+    "bootstrap": "^4.5.3",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  }
 }
