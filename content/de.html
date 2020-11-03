@@ -4,15 +4,12 @@
             <h4 class="modal-title">Privatsphäre Einstellungen</h4>
         </div>
         <div class="modal-body">
-            <p class="bcb-body-text">Wir nutzen Cookies und ähnliche Technologien, die zum Betrieb der Website
-                erforderlich sind. Zusätzliche Cookies werden nur mit Ihrer Zustimmung verwendet. Wir verwenden die
-                zusätzlichen Cookies, um Analysen der Website-Nutzung durchzuführen und Marketingmaßnahmen auf ihre
-                Effizienz zu prüfen. Diese Analysen finden statt, um Ihnen ein besseres Nutzungserlebnis der Website zu
-                bieten. Es steht Ihnen frei, Ihre Zustimmung jederzeit zu geben, zu verweigern oder zurückzuziehen,
-                indem Sie den Link "Cookie-Einstellungen" unten auf jeder Seite nutzen. Sie können der Verwendung von
-                Cookies durch uns zustimmen, indem Sie auf "Einverstanden" klicken. Für weitere Informationen darüber,
-                welche Daten gesammelt und wie sie an unsere Partner weitergegeben werden, lesen Sie bitte unsere
-                <a href="./demo/privacy-policy.html">Datenschutzerklärung</a>.</p>
+            <div class="bcb-body-text" style="font-size: 90%">
+                <!-- @formatter:off -->
+                <p>Wir nutzen Cookies und ähnliche Technologien, die zum Betrieb der Website erforderlich sind. Zusätzliche Cookies werden nur mit Ihrer Zustimmung verwendet. Wir verwenden die zusätzlichen Cookies, um Analysen der Website-Nutzung durchzuführen und Marketingmaßnahmen auf ihre Effizienz zu prüfen. Diese Analysen finden statt, um Ihnen ein besseres Nutzungserlebnis der Website zu bieten. Es steht Ihnen frei, Ihre Zustimmung jederzeit zu geben, zu verweigern oder zurückzuziehen, indem Sie den Link "Cookie-Einstellungen" unten auf jeder Seite nutzen. Sie können der Verwendung von Cookies durch uns zustimmen, indem Sie auf "Einverstanden" klicken. Für weitere Informationen darüber, welche Daten gesammelt und wie sie an unsere Partner weitergegeben werden, lesen Sie bitte unsere <a href="./demo/privacy-policy.html">Datenschutzerklärung</a>.</p>
+                <p>Hinweis auf Verarbeitung Ihrer personenbezogenen Daten in den USA durch Google: Indem Sie der Verwendung von Analyse-Cookie zustimmen, willigen Sie gem. Art. 49 Abs. 1 S. 1 lit. a DSGVO ein, dass Ihre Daten in den USA verarbeitet werden. Der Datenschutzstandard in den USA ist nach Ansicht des Europäischen Gerichtshof unzureichend und es besteht die Gefahr, dass Ihre Daten durch US-Behörden, zu Kontroll- und Überwachungszwecken, möglicherweise auch ohne Rechtsbehelfsmöglichkeiten, verarbeitet werden. Sie können Ihre Einwilligung jederzeit widerrufen.</p>
+                <!-- @formatter:on -->
+            </div>
             <p><a href="./demo/legal-notice.html">Impressum</a>
                 <a href="#bcb-options" data-toggle="collapse" class="float-right">Meine Einstellungen</a></p>
             <div id="bcb-options" class="collapse">
@@ -25,14 +22,25 @@
                         <li>Zum Betrieb der Website erforderlich</li>
                     </ul>
                 </div>
-                <div class="bcb-option" data-name="analysis">
+                <div class="bcb-option" data-name="analyses">
                     <div class="custom-control custom-checkbox mb-1">
-                        <input type="checkbox" class="custom-control-input" id="bcb-checkboxAnalyse">
-                        <label class="custom-control-label" for="bcb-checkboxAnalyse"><b>Analysen</b></label>
+                        <input type="checkbox" class="custom-control-input" id="bcb-checkboxAnalyses">
+                        <label class="custom-control-label" for="bcb-checkboxAnalyses"><b>Analysen</b></label>
                     </div>
                     <ul>
                         <li>Beobachtung der Website-Nutzung und Optimierung der Benutzererfahrung</li>
                         <li>Bewertung von Marketingaktionen</li>
+                    </ul>
+                </div>
+                <div class="bcb-option" data-name="personalization">
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="bcb-checkboxPersonalization">
+                        <label class="custom-control-label" for="bcb-checkboxPersonalization"><b>Personalisierung</b></label>
+                    </div>
+                    <ul>
+                        <li>Speicherung Ihrer Präfererenzen aus frühreren Besuchen</li>
+                        <li>Sammeln von Benutzer-Feedback zur Verbesserung unserer Website</li>
+                        <li>Erfassung Ihrer Interessen, um maßgeschneiderte Inhalte und Angebote anzubieten</li>
                     </ul>
                 </div>
             </div>

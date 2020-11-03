@@ -28,7 +28,7 @@
             <pre class="mb-0" id="settingsOutput"></pre>
         </div>
     </div>
-    <p>Read a specific cookie setting with <code>cookieSettings.getSettings('analysis')</code></p>
+    <p>Read a specific cookie setting with <code>cookieSettings.getSettings('analyses')</code></p>
     <div class="card">
         <div class="card-body">
             <pre class="mb-0" id="settingsAnalysisOutput"></pre>
@@ -41,7 +41,7 @@
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script>
-    var cookieSettings = new BootstrapCookieConsentSettings({lang: "de"})
+    var cookieSettings = new BootstrapCookieConsentSettings()
 
     function showSettingsDialog() {
         cookieSettings.showDialog()
@@ -49,7 +49,7 @@
 
     $(document).ready(function () {
         $("#settingsOutput").text(JSON.stringify(cookieSettings.getSettings()))
-        $("#settingsAnalysisOutput").text(cookieSettings.getSettings("analysis"))
+        $("#settingsAnalysisOutput").text(cookieSettings.getSettings("analyses"))
     })
 </script>
 </body>

@@ -1,0 +1,62 @@
+<div class="modal-dialog modal-lg shadow" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Privacy Settings</h4>
+        </div>
+        <div class="modal-body">
+            <div class="bcb-body-text" style="font-size: 90%">
+                <!-- @formatter:off -->
+                <p>We use cookies and similar technologies that are necessary to operate the website. Additional cookies are only used with your consent. We use the additional cookies to perform analyses of website usage and to check marketing measures for their efficiency. These analyses are carried out to provide you with a better user experience on the website. You are free to give, deny, or withdraw your consent at any time by using the "cookie settings" link at the bottom of each page. You can consent to our use of cookies by clicking "Agree". For more information about what information is collected and how it is shared with our partners, please read our <a href="./demo/privacy-policy.html">Data Protection Statement</a>.</p>
+                <p>By agreeing to the use of analysis cookies, you consent to the processing of your data in the USA in accordance with Art. 49 para. 1 sentence 1 lit. a GDPR. According to the European Court of Justice, the data protection standard in the USA is inadequate and there is a risk that your data will be processed by US authorities for control and monitoring purposes, possibly without the possibility of legal recourse. You can revoke your consent at any time.</p>
+                <!-- @formatter:on -->
+            </div>
+            <p><a href="./demo/legal-notice.html">Legal Notice</a>
+                <a href="#bcb-options" data-toggle="collapse" class="float-right">My settings</a></p>
+
+            <div id="bcb-options" class="collapse">
+                <div class="bcb-option" data-name="necessary">
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" checked disabled class="custom-control-input" id="bcb-checkboxNecessary">
+                        <label class="custom-control-label" for="bcb-checkboxNecessary"><b>Necessary</b></label>
+                    </div>
+                    <ul>
+                        <li>Required to run the website</li>
+                    </ul>
+                </div>
+                <div class="bcb-option" data-name="analyses">
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="bcb-checkboxAnalyses">
+                        <label class="custom-control-label" for="bcb-checkboxAnalyses"><b>Analyses</b></label>
+                    </div>
+                    <ul>
+                        <li>Monitoring website usage and optimizing the user experience</li>
+                        <li>Evaluation of marketing actions</li>
+                    </ul>
+                </div>
+                <div class="bcb-option" data-name="personalization">
+                    <div class="custom-control custom-checkbox mb-1">
+                        <input type="checkbox" class="custom-control-input" id="bcb-checkboxPersonalization">
+                        <label class="custom-control-label"
+                               for="bcb-checkboxPersonalization"><b>Personalization</b></label>
+                    </div>
+                    <ul>
+                        <li>Storage of your preferences from previous visits</li>
+                        <li>Collecting user feedback to improve our website</li>
+                        <li>Recording of your interests in order to provide customised content and offers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="bcb-buttonDoNotAgree" type="button"
+                    class="btn btn-link text-muted text-decoration-none">
+                I do not agree
+            </button>
+            <button id="bcb-buttonAgree" type="button" class="btn btn-primary">Agree</button>
+            <button id="bcb-buttonSave" type="button" class="btn btn-outline-dark">
+                Save selection
+            </button>
+            <button id="bcb-buttonAgreeAll" type="button" class="btn btn-primary">Agree to all</button>
+        </div>
+    </div>
+</div>

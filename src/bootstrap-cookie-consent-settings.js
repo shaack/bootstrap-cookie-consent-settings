@@ -20,11 +20,14 @@ function BootstrapCookieConsentSettings(props) {
         // noinspection JSUnfilteredForInLoop
         this.props[property] = props[property]
     }
-    if (this.props.languages.includes(this.props.lang)) {
-        this.lang = this.props.lang
-    } else {
+    this.lang = this.props.lang
+    if (this.lang.indexOf("-") !== -1) {
+        this.lang = this.lang.split("-")[0]
+    }
+    if (!this.props.languages.includes(this.lang)) {
         this.lang = this.props.languages[0] // fallback
     }
+    console.log("bootstrap-cookie-consent-settings,", "settings language: " + this.lang)
     var Cookie = {
         set: function (name, value, days) {
             var expires = ""
@@ -122,7 +125,7 @@ function BootstrapCookieConsentSettings(props) {
 
     function updateOptionsFromCookie() {
         var settings = self.getSettings()
-        if(settings) {
+        if (settings) {
             for (var setting in settings) {
                 var $checkbox = self.$modal.find("#bcb-options .bcb-option[data-name='" + setting + "'] input[type='checkbox']")
                 // noinspection JSUnfilteredForInLoop
@@ -151,22 +154,22 @@ function BootstrapCookieConsentSettings(props) {
         for (var i = 0; i < $options.length; i++) {
             var option = $options[i]
             var name = option.getAttribute("data-name")
-            if(name === "necessary") {
+            if (name === "necessary") {
                 options[name] = true
-            } else if(setAllExceptNecessary === undefined) {
+            } else if (setAllExceptNecessary === undefined) {
                 var $checkbox = $(option).find("input[type='checkbox']")
                 options[name] = $checkbox.prop("checked")
             } else {
                 options[name] = !!setAllExceptNecessary
             }
         }
-        return options;
+        return options
     }
 
     function agreeAll() {
         Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays)
         self.$modal.modal("hide")
-        self.$modal.on("hidden.bs.modal", function() {
+        self.$modal.on("hidden.bs.modal", function () {
             location.reload()
         })
     }
@@ -174,7 +177,7 @@ function BootstrapCookieConsentSettings(props) {
     function doNotAgree() {
         Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays)
         self.$modal.modal("hide")
-        self.$modal.on("hidden.bs.modal", function() {
+        self.$modal.on("hidden.bs.modal", function () {
             location.reload()
         })
     }
@@ -182,7 +185,7 @@ function BootstrapCookieConsentSettings(props) {
     function saveSettings() {
         Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays)
         self.$modal.modal("hide")
-        self.$modal.on("hidden.bs.modal", function() {
+        self.$modal.on("hidden.bs.modal", function () {
             location.reload()
         })
     }
@@ -200,7 +203,7 @@ function BootstrapCookieConsentSettings(props) {
     }
     this.getSettings = function (optionName) {
         var cookie = Cookie.get(self.props.cookieName)
-        if(cookie) {
+        if (cookie) {
             var settings = JSON.parse(Cookie.get(self.props.cookieName))
             if (optionName === undefined) {
                 return settings
