@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-cookie-consent-settings",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Settings dialog in Bootstrap 4 and framework to handle the German and EU law (may 2020) about cookies in a website",
   "browser": "./src/bootstrap-cookie-banner.js",
   "scripts": {
