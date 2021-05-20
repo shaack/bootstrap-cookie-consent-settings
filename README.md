@@ -50,7 +50,7 @@ cookieSettings.getSettings()
 It should return some JSON like
 
 ```json
-{"necessary":true,"analysis":false}
+{"necessary":true,"analyses":false}
 ```
 or 
 `undefined`, before the user has choosen his cookie options.
@@ -58,7 +58,7 @@ or
 Read a specific cookie setting with 
 
 ```js
-cookieSettings.getSettings('analysis')
+cookieSettings.getSettings('analyses')
 ```
-for the `analysis` cookie settings. Also returns `undefined`, before the user has choosen 
+for the `analyses` cookie settings. Also returns `undefined`, before the user has choosen 
 his cookie options.
