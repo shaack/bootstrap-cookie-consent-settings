@@ -5,16 +5,18 @@
  */
 
 function BootstrapCookieConsentSettings(props) {
-    var modalId = "bcb-modal"
+    var modalId = "bccs-modal"
     var self = this
     var detailedSettingsShown = false
     this.props = {
+        // blockAccess: false, // set "true" to block the access to the website before choosing a cookie configuration
         autoShowDialog: true, // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
         lang: navigator.language, // the language, in which the modal is shown
         languages: ["en", "de"], // supported languages (in ./content/), defaults to first in array
         contentURL: "./content/", // this URL must contain the dialogs content in the needed languages
         cookieName: "cookie-consent-settings",  // the name of the cookie in which the configuration is stored as JSON
-        cookieStorageDays: 365 // the duration the cookie configuration is stored on the client
+        cookieStorageDays: 365, // the duration the cookie configuration is stored on the client
+        postSelectionCallback: undefined // callback, after the user has made his selection
     }
     for (var property in props) {
         // noinspection JSUnfilteredForInLoop
@@ -27,7 +29,6 @@ function BootstrapCookieConsentSettings(props) {
     if (!this.props.languages.includes(this.lang)) {
         this.lang = this.props.languages[0] // fallback
     }
-    console.log("bootstrap-cookie-consent-settings,", "settings language: " + this.lang)
     var Cookie = {
         set: function (name, value, days) {
             var expires = ""
@@ -51,23 +52,20 @@ function BootstrapCookieConsentSettings(props) {
                 }
             }
             return undefined
-        },
-        remove: function (name) {
-            document.cookie = name + '=; Path=/; SameSite=Strict; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
         }
     }
-    var Util = {
-        documentReady: function (fn) {
+    var Events = {
+        documentReady: function (onDocumentReady) {
             if (document.readyState !== 'loading') {
-                fn()
+                onDocumentReady()
             } else {
-                document.addEventListener('DOMContentLoaded', fn)
+                document.addEventListener('DOMContentLoaded', onDocumentReady)
             }
         }
     }
 
     function showDialog() {
-        Util.documentReady(function () {
+        Events.documentReady(function () {
             this.modal = document.getElementById(modalId)
             if (!self.modal) {
                 self.modal = document.createElement("div")
@@ -87,13 +85,13 @@ function BootstrapCookieConsentSettings(props) {
                             backdrop: "static",
                             keyboard: false
                         })
-                        self.$buttonDoNotAgree = $("#bcb-buttonDoNotAgree")
-                        self.$buttonAgree = $("#bcb-buttonAgree")
-                        self.$buttonSave = $("#bcb-buttonSave")
-                        self.$buttonAgreeAll = $("#bcb-buttonAgreeAll")
+                        self.$buttonDoNotAgree = $("#bccs-buttonDoNotAgree")
+                        self.$buttonAgree = $("#bccs-buttonAgree")
+                        self.$buttonSave = $("#bccs-buttonSave")
+                        self.$buttonAgreeAll = $("#bccs-buttonAgreeAll")
                         updateButtons()
                         updateOptionsFromCookie()
-                        $("#bcb-options").on("hide.bs.collapse", function () {
+                        $("#bccs-options").on("hide.bs.collapse", function () {
                             detailedSettingsShown = false
                             updateButtons()
                         }).on("show.bs.collapse", function () {
@@ -113,8 +111,8 @@ function BootstrapCookieConsentSettings(props) {
                             agreeAll()
                         })
                     })
-                    .fail(function (data) {
-                        console.error("bootstrap-cookie-banner, request of \"" + templateUrl + "\" failed, statusCode: " + data.status)
+                    .fail(function () {
+                        console.error("You probably need to set `contentURL` in the props")
                         console.error("see documentation at https://github.com/shaack/bootstrap-cookie-banner")
                     })
             } else {
@@ -127,7 +125,7 @@ function BootstrapCookieConsentSettings(props) {
         var settings = self.getSettings()
         if (settings) {
             for (var setting in settings) {
-                var $checkbox = self.$modal.find("#bcb-options .bcb-option[data-name='" + setting + "'] input[type='checkbox']")
+                var $checkbox = self.$modal.find("#bccs-options .bccs-option[data-name='" + setting + "'] input[type='checkbox']")
                 // noinspection JSUnfilteredForInLoop
                 $checkbox.prop("checked", settings[setting])
             }
@@ -149,7 +147,7 @@ function BootstrapCookieConsentSettings(props) {
     }
 
     function gatherOptions(setAllExceptNecessary) {
-        var $options = self.$modal.find("#bcb-options .bcb-option")
+        var $options = self.$modal.find("#bccs-options .bccs-option")
         var options = {}
         for (var i = 0; i < $options.length; i++) {
             var option = $options[i]
@@ -170,7 +168,9 @@ function BootstrapCookieConsentSettings(props) {
         Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays)
         self.$modal.modal("hide")
         self.$modal.on("hidden.bs.modal", function () {
-            location.reload()
+            if(self.props.postSelectionCallback) {
+                self.props.postSelectionCallback()
+            }
         })
     }
 
@@ -178,7 +178,9 @@ function BootstrapCookieConsentSettings(props) {
         Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays)
         self.$modal.modal("hide")
         self.$modal.on("hidden.bs.modal", function () {
-            location.reload()
+            if(self.props.postSelectionCallback) {
+                self.props.postSelectionCallback()
+            }
         })
     }
 
@@ -186,7 +188,9 @@ function BootstrapCookieConsentSettings(props) {
         Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays)
         self.$modal.modal("hide")
         self.$modal.on("hidden.bs.modal", function () {
-            location.reload()
+            if(self.props.postSelectionCallback) {
+                self.props.postSelectionCallback()
+            }
         })
     }
 

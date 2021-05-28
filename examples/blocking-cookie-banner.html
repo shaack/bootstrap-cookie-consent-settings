@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <title>bootstrap-cookie-banner demo page</title>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-5 mb-4"><a href="../">bootstrap-cookie-consent-settings</a> demo page, blocking banner with reload
+        after
+        selection</h1>
+    <h2>Usage</h2>
+    <h3>Construct</h3>
+    <p>Initialize the cookie consent framework with the constructor</p>
+    <p><code>var cookieSettings = new BootstrapCookieConsent()</code></p>
+    <h3>Show the Dialog</h3>
+    <p>On a new visit the dialog is shown automatically. For reconfiguration
+        show the Dialog again with <code>cookieSettings.showDialog()</code>.
+    </p>
+    <p>
+        <a href="javascript:showSettingsDialog()" class="btn btn-primary">Cookie Settings</a>
+    </p>
+    <h3>Read the settings</h3>
+    <p>Read all cookie settings with <code>cookieSettings.getSettings()</code></p>
+    <div class="card mb-4">
+        <div class="card-body">
+            <pre class="mb-0" id="settingsOutput"></pre>
+        </div>
+    </div>
+    <p>Read a specific cookie setting with <code>cookieSettings.getSettings('analyses')</code></p>
+    <div class="card">
+        <div class="card-body">
+            <pre class="mb-0" id="settingsAnalysisOutput"></pre>
+        </div>
+    </div>
+    <h2 class="mt-4">More documentation</h2>
+    <p><a href="https://github.com/shaack/bootstrap-cookie-consent-settings">Find more documentation and the sourcecode
+        on GitHub</a></p>
+</div>
+<script src="../src/bootstrap-cookie-consent-settings.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script>
+    var cookieSettings = new BootstrapCookieConsentSettings({
+        contentURL: "../content/", postSelectionCallback: function () {
+            location.reload()
+        }
+    })
+
+    function showSettingsDialog() {
+        cookieSettings.showDialog()
+    }
+
+    $(document).ready(function () {
+        $("#settingsOutput").text(JSON.stringify(cookieSettings.getSettings()))
+        $("#settingsAnalysisOutput").text(cookieSettings.getSettings("analyses"))
+    })
+</script>
+</body>
+</html>
