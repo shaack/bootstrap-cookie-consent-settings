@@ -36,8 +36,19 @@
             <pre class="mb-0" id="settingsAnalysisOutput"></pre>
         </div>
     </div>
+    <h2 class="mt-4">The code of this banner</h2>
+    <div class="card">
+        <div class="card-body">
+<pre><code>var cookieSettings = new BootstrapCookieConsentSettings({
+    contentURL: "../content",
+    postSelectionCallback: function () {
+        location.reload()
+    }
+})</code></pre>
+</div>
+</div>
     <h2 class="mt-4">More documentation</h2>
-    <p><a href="https://github.com/shaack/bootstrap-cookie-consent-settings">Find more documentation and the sourcecode
+    <p class="mb-5"><a href="https://github.com/shaack/bootstrap-cookie-consent-settings">Find more documentation and the sourcecode
         on GitHub</a></p>
 </div>
 <script src="../src/bootstrap-cookie-consent-settings.js"></script>
@@ -45,7 +56,8 @@
 <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script>
     var cookieSettings = new BootstrapCookieConsentSettings({
-        contentURL: "../content", postSelectionCallback: function () {
+        contentURL: "../content",
+        postSelectionCallback: function () {
             location.reload()
         }
     })

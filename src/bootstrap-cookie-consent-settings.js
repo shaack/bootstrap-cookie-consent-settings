@@ -9,7 +9,6 @@ function BootstrapCookieConsentSettings(props) {
     var self = this
     var detailedSettingsShown = false
     this.props = {
-        // blockAccess: false, // set "true" to block the access to the website before choosing a cookie configuration
         autoShowDialog: true, // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
         lang: navigator.language, // the language, in which the modal is shown
         languages: ["en", "de"], // supported languages (in ./content/), defaults to first in array
