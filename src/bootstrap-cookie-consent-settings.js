@@ -13,7 +13,7 @@ function BootstrapCookieConsentSettings(props) {
         autoShowDialog: true, // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
         lang: navigator.language, // the language, in which the modal is shown
         languages: ["en", "de"], // supported languages (in ./content/), defaults to first in array
-        contentURL: "./content/", // this URL must contain the dialogs content in the needed languages
+        contentURL: "./content", // this URL must contain the dialogs content in the needed languages
         cookieName: "cookie-consent-settings",  // the name of the cookie in which the configuration is stored as JSON
         cookieStorageDays: 365, // the duration the cookie configuration is stored on the client
         postSelectionCallback: undefined // callback, after the user has made his selection
@@ -77,7 +77,7 @@ function BootstrapCookieConsentSettings(props) {
                 document.body.append(self.modal)
                 self.$modal = $(self.modal)
                 // load content
-                var templateUrl = self.props.contentURL + self.lang + ".html"
+                var templateUrl = self.props.contentURL + "/" + self.lang + ".html"
                 $.get(templateUrl)
                     .done(function (data) {
                         self.modal.innerHTML = data

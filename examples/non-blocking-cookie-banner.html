@@ -35,22 +35,31 @@
         </div>
     </div>
     <h2 class="mt-4">More documentation</h2>
-    <p><a href="https://github.com/shaack/bootstrap-cookie-consent-settings">Find more documentation and the sourcecode on GitHub</a></p>
+    <p><a href="https://github.com/shaack/bootstrap-cookie-consent-settings">Find more documentation and the sourcecode
+        on GitHub</a></p>
 </div>
 <script src="../src/bootstrap-cookie-consent-settings.js"></script>
 <script src="../node_modules/jquery/dist/jquery.min.js"></script>
 <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script>
-    var cookieSettings = new BootstrapCookieConsentSettings({contentUrl: "../content"})
+    var cookieSettings = new BootstrapCookieConsentSettings({
+        contentURL: "../content", postSelectionCallback: function() {
+            showSettings()
+        }
+    })
 
     function showSettingsDialog() {
         cookieSettings.showDialog()
     }
 
     $(document).ready(function () {
+        showSettings()
+    })
+
+    function showSettings() {
         $("#settingsOutput").text(JSON.stringify(cookieSettings.getSettings()))
         $("#settingsAnalysisOutput").text(cookieSettings.getSettings("analyses"))
-    })
+    }
 </script>
 </body>
 </html>
