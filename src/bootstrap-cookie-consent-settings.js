@@ -15,7 +15,7 @@ function BootstrapCookieConsentSettings(props) {
         contentURL: "./content", // this URL must contain the dialogs content in the needed languages
         cookieName: "cookie-consent-settings",  // the name of the cookie in which the configuration is stored as JSON
         cookieStorageDays: 365, // the duration the cookie configuration is stored on the client
-        postSelectionCallback: undefined // callback, after the user has made his selection
+        postSelectionCallback: undefined // callback function, called after the user has made his selection
     }
     for (var property in props) {
         // noinspection JSUnfilteredForInLoop
