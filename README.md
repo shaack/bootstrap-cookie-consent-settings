@@ -40,7 +40,7 @@ For reconfiguration show the Dialog again with
 cookieSettings.showDialog()
 ```
 
-### Read the settings
+### Read the settings in JavaScript
 
 Read all cookie settings with 
 
@@ -55,10 +55,27 @@ It should return some JSON like
 or 
 `undefined`, before the user has choosen his cookie options.
 
-Read a specific cookie setting with 
+Read a specific cookie setting with
 
 ```js
 cookieSettings.getSettings('analyses')
 ```
 for the `analyses` cookie settings. Also returns `undefined`, before the user has choosen 
 his cookie options.
+
+### Read the settings with a PHP script on the server
+
+You can read the settings with all server languages, you just have to read the cookie and decode the JSON.
+
+This is an PHP example how to read, if 'analyses' was allowed. 
+
+```PHP
+$consentCookieJson = @$_COOKIE['cookie-consent-settings'];
+if ($consentCookieJson) {
+    $consentCookie = json_decode($consentCookieJson);
+    if($consentCookie && $consentCookie->analyses) {
+        // do analysing things here
+    }
+}
+```
+
