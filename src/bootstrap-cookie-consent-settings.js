@@ -75,6 +75,11 @@ function BootstrapCookieConsentSettings(props) {
                 self.modal.setAttribute("aria-labelledby", modalId)
                 document.body.append(self.modal)
                 self.$modal = $(self.modal)
+                if (self.props.postSelectionCallback) {
+                    self.$modal.on("hidden.bs.modal", function () {
+                        self.props.postSelectionCallback()
+                    })
+                }
                 // load content
                 var templateUrl = self.props.contentURL + "/" + self.lang + ".html"
                 $.get(templateUrl)
@@ -166,31 +171,16 @@ function BootstrapCookieConsentSettings(props) {
     function agreeAll() {
         Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays)
         self.$modal.modal("hide")
-        self.$modal.on("hidden.bs.modal", function () {
-            if(self.props.postSelectionCallback) {
-                self.props.postSelectionCallback()
-            }
-        })
     }
 
     function doNotAgree() {
         Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays)
         self.$modal.modal("hide")
-        self.$modal.on("hidden.bs.modal", function () {
-            if(self.props.postSelectionCallback) {
-                self.props.postSelectionCallback()
-            }
-        })
     }
 
     function saveSettings() {
         Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays)
         self.$modal.modal("hide")
-        self.$modal.on("hidden.bs.modal", function () {
-            if(self.props.postSelectionCallback) {
-                self.props.postSelectionCallback()
-            }
-        })
     }
 
     // init
