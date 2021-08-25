@@ -9,22 +9,24 @@
                 <p>Wir nutzen Cookies und ähnliche Technologien, die zum Betrieb der Website erforderlich sind. Zusätzliche Cookies werden nur mit Ihrer Zustimmung verwendet. Wir verwenden die zusätzlichen Cookies, um Analysen der Website-Nutzung durchzuführen und Marketingmaßnahmen auf ihre Effizienz zu prüfen. Diese Analysen finden statt, um Ihnen ein besseres Nutzungserlebnis der Website zu bieten. Es steht Ihnen frei, Ihre Zustimmung jederzeit zu geben, zu verweigern oder zurückzuziehen, indem Sie den Link "Cookie-Einstellungen" unten auf jeder Seite nutzen. Sie können der Verwendung von Cookies durch uns zustimmen, indem Sie auf "Einverstanden" klicken. Für weitere Informationen darüber, welche Daten gesammelt und wie sie an unsere Partner weitergegeben werden, lesen Sie bitte unsere <a href="../examples/legal-pages-dummy/privacy-policy.html">Datenschutzerklärung</a>.</p>
                 <!-- @formatter:on -->
             </div>
-            <p><a href="../examples/legal-pages-dummy/legal-notice.html">Impressum</a>
-                <a href="#bccs-options" data-toggle="collapse" class="float-right">Meine Einstellungen</a></p>
+            <p class="d-flex justify-content-between">
+                <a href="../examples/legal-pages-dummy/legal-notice.html">Impressum</a>
+                <a href="#bccs-options" data-bs-toggle="collapse">Meine Einstellungen</a>
+            </p>
             <div id="bccs-options" class="collapse">
                 <div class="bccs-option" data-name="necessary">
-                    <div class="custom-control custom-checkbox mb-1">
-                        <input type="checkbox" checked disabled class="custom-control-input" id="bccs-checkboxNecessary">
-                        <label class="custom-control-label" for="bccs-checkboxNecessary"><b>Notwendig</b></label>
+                    <div class="form-check mb-1">
+                        <input type="checkbox" checked disabled class="form-check-input" id="bccs-checkboxNecessary">
+                        <label class="form-check-label" for="bccs-checkboxNecessary"><b>Notwendig</b></label>
                     </div>
                     <ul>
                         <li>Zum Betrieb der Website erforderlich</li>
                     </ul>
                 </div>
                 <div class="bccs-option" data-name="analyses">
-                    <div class="custom-control custom-checkbox mb-1">
-                        <input type="checkbox" class="custom-control-input" id="bccs-checkboxAnalyses">
-                        <label class="custom-control-label" for="bccs-checkboxAnalyses"><b>Analysen</b></label>
+                    <div class="form-check mb-1">
+                        <input type="checkbox" class="form-check-input" id="bccs-checkboxAnalyses">
+                        <label class="form-check-label" for="bccs-checkboxAnalyses"><b>Analysen</b></label>
                     </div>
                     <ul>
                         <li>Beobachtung der Website-Nutzung und Optimierung der Benutzererfahrung</li>
@@ -32,9 +34,9 @@
                     </ul>
                 </div>
                 <div class="bccs-option" data-name="personalization">
-                    <div class="custom-control custom-checkbox mb-1">
-                        <input type="checkbox" class="custom-control-input" id="bccs-checkboxPersonalization">
-                        <label class="custom-control-label" for="bccs-checkboxPersonalization"><b>Personalisierung</b></label>
+                    <div class="form-check mb-1">
+                        <input type="checkbox" class="form-check-input" id="bccs-checkboxPersonalization">
+                        <label class="form-check-label" for="bccs-checkboxPersonalization"><b>Personalisierung</b></label>
                     </div>
                     <ul>
                         <li>Speicherung Ihrer Präfererenzen aus frühreren Besuchen</li>

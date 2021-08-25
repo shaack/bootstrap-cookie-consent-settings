@@ -114,6 +114,7 @@ function BootstrapCookieConsentSettings(props) {
                         self.$buttonAgreeAll.click(function () {
                             agreeAll()
                         })
+                        self.$modal.modal("show")
                     })
                     .fail(function () {
                         console.error("You probably need to set `contentURL` in the props")
@@ -184,7 +185,6 @@ function BootstrapCookieConsentSettings(props) {
     }
 
     // init
-
     if (Cookie.get(this.props.cookieName) === undefined && this.props.autoShowDialog) {
         showDialog()
     }
