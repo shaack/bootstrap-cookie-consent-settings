@@ -1,6 +1,6 @@
 /**
  * Author and copyright: Stefan Haack (https://shaack.com)
- * Repository: https://github.com/shaack/bootstrap-cookie-banner
+ * Repository: https://github.com/shaack/bootstrap-cookie-consent-settings
  * License: MIT, see file 'LICENSE'
  */
 
