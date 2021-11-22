@@ -4,10 +4,12 @@
  * License: MIT, see file 'LICENSE'
  */
 
+const sh = {bccs: {}}
+
 function BootstrapCookieConsentSettings(props) {
-    var modalId = "bccs-modal"
-    var self = this
-    var detailedSettingsShown = false
+    const modalId = "bccs-modal"
+    const self = this
+    let detailedSettingsShown = false
     this.props = {
         autoShowDialog: true, // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
         lang: navigator.language, // the language, in which the modal is shown
@@ -17,7 +19,7 @@ function BootstrapCookieConsentSettings(props) {
         cookieStorageDays: 365, // the duration the cookie configuration is stored on the client
         postSelectionCallback: undefined // callback function, called after the user has made his selection
     }
-    for (var property in props) {
+    for (const property in props) {
         // noinspection JSUnfilteredForInLoop
         this.props[property] = props[property]
     }
@@ -28,21 +30,21 @@ function BootstrapCookieConsentSettings(props) {
     if (!this.props.languages.includes(this.lang)) {
         this.lang = this.props.languages[0] // fallback
     }
-    var Cookie = {
+    const Cookie = {
         set: function (name, value, days) {
-            var expires = ""
+            let expires = ""
             if (days) {
-                var date = new Date()
+                const date = new Date()
                 date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
                 expires = "; expires=" + date.toUTCString()
             }
             document.cookie = name + "=" + (value || "") + expires + "; Path=/; SameSite=Strict;"
         },
         get: function (name) {
-            var nameEQ = name + "="
-            var ca = document.cookie.split(';')
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i]
+            const nameEQ = name + "="
+            const ca = document.cookie.split(';')
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i]
                 while (c.charAt(0) === ' ') {
                     c = c.substring(1, c.length)
                 }
@@ -53,7 +55,7 @@ function BootstrapCookieConsentSettings(props) {
             return undefined
         }
     }
-    var Events = {
+    const Events = {
         documentReady: function (onDocumentReady) {
             if (document.readyState !== 'loading') {
                 onDocumentReady()
@@ -81,7 +83,7 @@ function BootstrapCookieConsentSettings(props) {
                     })
                 }
                 // load content
-                var templateUrl = self.props.contentURL + "/" + self.lang + ".html"
+                const templateUrl = self.props.contentURL + "/" + self.lang + ".html"
                 $.get(templateUrl)
                     .done(function (data) {
                         self.modal.innerHTML = data
@@ -127,10 +129,10 @@ function BootstrapCookieConsentSettings(props) {
     }
 
     function updateOptionsFromCookie() {
-        var settings = self.getSettings()
+        const settings = self.getSettings()
         if (settings) {
-            for (var setting in settings) {
-                var $checkbox = self.$modal.find("#bccs-options .bccs-option[data-name='" + setting + "'] input[type='checkbox']")
+            for (let setting in settings) {
+                const $checkbox = self.$modal.find("#bccs-options .bccs-option[data-name='" + setting + "'] input[type='checkbox']")
                 // noinspection JSUnfilteredForInLoop
                 $checkbox.prop("checked", settings[setting])
             }
@@ -152,15 +154,15 @@ function BootstrapCookieConsentSettings(props) {
     }
 
     function gatherOptions(setAllExceptNecessary) {
-        var $options = self.$modal.find("#bccs-options .bccs-option")
-        var options = {}
-        for (var i = 0; i < $options.length; i++) {
-            var option = $options[i]
-            var name = option.getAttribute("data-name")
+        const $options = self.$modal.find("#bccs-options .bccs-option")
+        const options = {}
+        for (let i = 0; i < $options.length; i++) {
+            const option = $options[i]
+            const name = option.getAttribute("data-name")
             if (name === "necessary") {
                 options[name] = true
             } else if (setAllExceptNecessary === undefined) {
-                var $checkbox = $(option).find("input[type='checkbox']")
+                const $checkbox = $(option).find("input[type='checkbox']")
                 options[name] = $checkbox.prop("checked")
             } else {
                 options[name] = !!setAllExceptNecessary
@@ -184,6 +186,13 @@ function BootstrapCookieConsentSettings(props) {
         self.$modal.modal("hide")
     }
 
+    function includeJs(src) {
+        const scriptElement = document.createElement("script")
+        scriptElement.type = "text/javascript"
+        scriptElement.src = src
+        document.head.appendChild(scriptElement)
+    }
+
     // init
     if (Cookie.get(this.props.cookieName) === undefined && this.props.autoShowDialog) {
         showDialog()
@@ -195,9 +204,9 @@ function BootstrapCookieConsentSettings(props) {
         showDialog()
     }
     this.getSettings = function (optionName) {
-        var cookie = Cookie.get(self.props.cookieName)
+        const cookie = Cookie.get(self.props.cookieName)
         if (cookie) {
-            var settings = JSON.parse(Cookie.get(self.props.cookieName))
+            const settings = JSON.parse(Cookie.get(self.props.cookieName))
             if (optionName === undefined) {
                 return settings
             } else {
