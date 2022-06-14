@@ -1,6 +1,6 @@
 # bootstrap-cookie-consent-settings
 
-A modal dialog (cookie banner) and framework to handle the EU law (as written by EuGH, 1.10.2019 – C-673/17) 
+A modal dialog (cookie banner) and framework to handle the EU law (as written by EuGH, 1.10.2019 – C-673/17)
 about cookies in a website. Needs Bootstrap 5.
 
 - [Demo page](https://shaack.com/projekte/bootstrap-cookie-consent-settings)
@@ -17,13 +17,13 @@ Initialize the cookie consent framework with the constructor
 var cookieSettings = new BootstrapCookieConsent(props)
 ```
 
-You may configure the framework with the `props` object. The default
-configuration is
+You should configure the framework with the `props` object, at least the properties `privacyPolicyUrl`, `legalNoticeUrl`
+and `contentURL`. The default configuration is
 
 ```js
 this.props = {
-    privacyPolicyUrl: undefined, // the URL of your privacy policy page
-    legalNoticeUrl: undefined, // the URL of you legal notice page (Impressum)
+    privacyPolicyUrl: undefined, // the URL of your privacy policy page (required)
+    legalNoticeUrl: undefined, // the URL of you legal notice page (required)
     contentURL: "/cookie-consent-content", // this folder must contain the language-files in the needed languages (`[lang].js`)
     buttonAgreeClass: "btn btn-primary", // the "Agree to all" buttons class
     buttonDontAgreeClass: "btn btn-link text-decoration-none", // the "I do not agree" buttons class
@@ -41,8 +41,7 @@ this.props = {
 
 ### Show dialog again
 
-On a new visit the dialog is shown automatically. 
-For reconfiguration show the Dialog again with 
+On a new visit the dialog is shown automatically. For reconfiguration show the Dialog again with
 
 ```js
 cookieSettings.showDialog()
@@ -50,17 +49,24 @@ cookieSettings.showDialog()
 
 ### Read the settings in JavaScript
 
-Read all cookie settings with 
+Read all cookie settings with
 
 ```js 
 cookieSettings.getSettings()
 ```
+
 It should return some JSON like
 
 ```json
-{"necessary":true,"statistics":true,"marketing":true,"personalization":true}
+{
+  "necessary": true,
+  "statistics": true,
+  "marketing": true,
+  "personalization": true
+}
 ```
-or 
+
+or
 `undefined`, before the user has choosen his cookie options.
 
 Read a specific cookie setting with
@@ -68,14 +74,14 @@ Read a specific cookie setting with
 ```js
 cookieSettings.getSettings('statistics')
 ```
-for the `statistics` cookie settings. Also returns `undefined`, before the user has choosen 
-his cookie options.
+
+for the `statistics` cookie settings. Also returns `undefined`, before the user has choosen his cookie options.
 
 ### Read the settings with a PHP script on the server
 
 You can read the settings with all server languages, you just have to read the cookie and decode the JSON.
 
-This is an PHP example how to read, if 'statistics' was allowed. 
+This is an PHP example how to read, if 'statistics' was allowed.
 
 ```PHP
 $consentCookieJson = @$_COOKIE['cookie-consent-settings'];
