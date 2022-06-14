@@ -39,7 +39,7 @@ this.props = {
 }
 ```
 
-### Show dialog again
+### Show dialog
 
 On a new visit the dialog is shown automatically. For reconfiguration show the Dialog again with
 
