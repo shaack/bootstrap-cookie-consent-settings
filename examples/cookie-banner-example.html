@@ -31,7 +31,7 @@
             <pre class="mb-0" id="settingsOutput"></pre>
         </div>
     </div>
-    <p>Read a specific cookie setting with <code>cookieSettings.getSettings('analyses')</code></p>
+    <p>Read a specific cookie setting with <code>cookieSettings.getSettings('statistics')</code></p>
     <div class="card">
         <div class="card-body">
             <pre class="mb-0" id="settingsAnalysisOutput"></pre>
@@ -41,7 +41,7 @@
     <div class="card">
         <div class="card-body">
 <pre><code>var cookieSettings = new BootstrapCookieConsentSettings({
-    contentURL: "../content",
+    contentURL: "../cookie-consent-content",
     postSelectionCallback: function () {
         location.reload() // reload after selection
     }
@@ -73,7 +73,7 @@
 
     $(document).ready(function () {
         $("#settingsOutput").text(JSON.stringify(cookieSettings.getSettings()))
-        $("#settingsAnalysisOutput").text(cookieSettings.getSettings("analyses"))
+        $("#settingsAnalysisOutput").text(cookieSettings.getSettings("statistics"))
     })
 </script>
 </body>

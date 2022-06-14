@@ -35,6 +35,19 @@ function BootstrapCookieConsentSettings(props) {
         this.lang = this.lang.split("-")[0]
     }
 
+    // read cookie, and if it not fits the categories, remove it
+    const cookie = getCookie(this.props.cookieName)
+    if(cookie) {
+        const cookieContent = JSON.parse(cookie)
+        for (const category of this.props.categories) {
+            if(cookieContent[category] === undefined) {
+                console.log("cookie settings changed, removing settings cookie")
+                removeCookie(this.props.cookieName)
+                break
+            }
+        }
+    }
+
     fetchContent(self.lang, (result) => {
         self.content = JSON.parse(result)
         renderModal()
@@ -60,7 +73,7 @@ function BootstrapCookieConsentSettings(props) {
             }
             optionsHtml += `<div class="bccs-option" data-name="${category}">
                     <div class="form-check mb-1">
-                        <input type="checkbox" checked class="form-check-input" id="bccs-checkbox-${category}">
+                        <input type="checkbox" class="form-check-input" id="bccs-checkbox-${category}">
                         <label class="form-check-label" for="bccs-checkbox-${category}"><b>${categoryContent.title}</b></label>
                     </div>
                     <ul>
@@ -95,7 +108,7 @@ function BootstrapCookieConsentSettings(props) {
             <button id="bccs-buttonSave" type="button" class="${self.props.buttonSaveClass}">
                 ${self.content.buttonSaveSelection}
             </button>
-            <button id="bccs-buttonAgreeAll" type="button" class="${self.props.buttonAgreeClass}">${self.content.buttonAgreeAll}/button>
+            <button id="bccs-buttonAgreeAll" type="button" class="${self.props.buttonAgreeClass}">${self.content.buttonAgreeAll}</button>
         </div>
     </div>
 </div>`
@@ -164,10 +177,12 @@ function BootstrapCookieConsentSettings(props) {
         if (settings) {
             for (let setting in settings) {
                 const $checkbox = self.$modal.find("#bccs-options .bccs-option[data-name='" + setting + "'] input[type='checkbox']")
-                // noinspection JSUnfilteredForInLoop
                 $checkbox.prop("checked", settings[setting])
             }
         }
+        const $checkboxNecessary = self.$modal.find("#bccs-options .bccs-option[data-name='necessary'] input[type='checkbox']")
+        $checkboxNecessary.prop("checked", true)
+        $checkboxNecessary.prop("disabled", true)
     }
 
     function updateButtons() {

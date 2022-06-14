@@ -1,0 +1,31 @@
+{
+  "title": "Paramètres de confidencialitat",
+  "body": "Utilizam de cookies e de tecnologias similaras que fan mestièr pel foncionament del site web. De cookies addicionals son sonque utilizats amb vòstre acòrd. Utilizam los cookies addicionals per realizar d'analisis dels usatges del site web e per verificar las mesuras comercialas e lor eficacitats. Aquelas analisis pòdon menar a vos ofrir una melhora experiéncia sul site web. Sètz liure de donar, refusar o tirar vòstre acòrd a tot moment en utilizant lo ligam «Paramètres de cookies» enbàs de cada pagina. Podètz consentir a nòstra utilizacion dels cookies en clicant «Acceptar». Per mai d'informacions tocant quina informacion es collectada e partejada amb nòstre socis, vejatz nòstra --privacy-policy--.",
+  "privacyPolicy": "declaracion de proteccion de las donadas",
+  "legalNotice": "Mencions legalas",
+  "mySettings": "Mos paramètres",
+  "buttonNotAgree": "Soi pas d'acòrd",
+  "buttonAgree": "Acceptar",
+  "buttonSaveSelection": "Enregistrar la seleccion",
+  "buttonAgreeAll": "Tot acceptar",
+  "categories": {
+    "necessary": {
+      "title": "Necessaris",
+      "description": ["Requerits pel foncionament del site"]
+    },
+    "statistics": {
+      "title": "Estatisticas",
+      "description": ["Per susvelhar l'utilizacion del site e melhorar l'experiéncia dels utilizaires"]
+    },
+    "marketing": {
+      "title": "Marketing",
+      "description": ["Estudi de las accions de marketing"]
+    },
+    "personalization": {
+      "title": "Personalizacion",
+      "description": ["Gardar las preferéncias de visitas precedentas",
+        "Reculhir los comentaris dels utilizaire per melhorar nòstre site web",
+        "Enregistrar vòstres interesses per vos fornir de contenguts e publicitats personalizats<"]
+    }
+  }
+}
