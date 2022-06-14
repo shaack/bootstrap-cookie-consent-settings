@@ -11,6 +11,9 @@ function BootstrapCookieConsentSettings(props) {
     const self = this
     let detailedSettingsShown = false
     this.props = {
+        privacyPolicyUrl: undefined, // the URL of your privacy policy page
+        legalNoticeUrl: undefined, // the URL of you legal notice page (Impressum)
+        contentURL: "/cookie-consent-content", // this folder must contain the language-files in the needed languages (`[lang].js`)
         buttonAgreeClass: "btn btn-primary", // the "Agree to all" buttons class
         buttonDontAgreeClass: "btn btn-link text-decoration-none", // the "I do not agree" buttons class
         buttonSaveClass: "btn btn-secondary", // the "Save selection" buttons class
@@ -18,13 +21,16 @@ function BootstrapCookieConsentSettings(props) {
         postSelectionCallback: undefined, // callback function, called after the user has saved the settings
         lang: navigator.language, // the language, in which the modal is shown
         defaultLang: "en", // default language, if `lang` is not available as translation in `cookie-consent-content`
-        contentURL: "./cookie-consent-content", // this URL must contain the language-files in the needed languages (`[lang].js`)
-        privacyPolicyUrl: "privacy-policy.html", // the URL of your privacy policy page
-        legalNoticeUrl: "legal-notice.html", // the URL of you legal notice page (Impressum)
         categories: ["necessary", "statistics", "marketing", "personalization"], // the categories for selection, must be contained in the language files
         cookieName: "cookie-consent-settings",  // the name of the cookie in which the configuration is stored as JSON
         cookieStorageDays: 365, // the duration the cookie configuration is stored on the client
         modalId: "bootstrapCookieConsentSettingsModal" // the id of the modal dialog element
+    }
+    if(!props.privacyPolicyUrl) {
+        console.error("please set `privacyPolicyUrl` in the props of BootstrapCookieConsentSettings")
+    }
+    if(!props.legalNoticeUrl) {
+        console.error("please set `legalNoticeUrl` in the props of BootstrapCookieConsentSettings")
     }
     for (const property in props) {
         // noinspection JSUnfilteredForInLoop

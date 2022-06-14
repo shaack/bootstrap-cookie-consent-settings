@@ -42,6 +42,8 @@
         <div class="card-body">
 <pre><code>var cookieSettings = new BootstrapCookieConsentSettings({
     contentURL: "../cookie-consent-content",
+    privacyPolicyUrl: "privacy-policy.html",
+    legalNoticeUrl: "legal-notice.html",
     postSelectionCallback: function () {
         location.reload() // reload after selection
     }
@@ -62,6 +64,8 @@
 <script>
     const cookieSettings = new BootstrapCookieConsentSettings({
         contentURL: "../cookie-consent-content",
+        privacyPolicyUrl: "privacy-policy.html",
+        legalNoticeUrl: "legal-notice.html",
         postSelectionCallback: function () {
             location.reload() // reload after selection
         }
