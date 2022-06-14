@@ -66,8 +66,7 @@ It should return some JSON like
 }
 ```
 
-or
-`undefined`, before the user has choosen his cookie options.
+or `undefined`, before the user has choosen his cookie options.
 
 Read a specific cookie setting with
 
