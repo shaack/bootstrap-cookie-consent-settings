@@ -5,8 +5,8 @@ sh.bccs.template = function(t) {
             <h4 class="modal-title">${t.title}</h4>
         </div>
         <div class="modal-body">
-            <div class="bccs-body-text" style="font-size: 80%">
-                <p>${t.mainText}</p>
+            <div class="bccs-body-text">
+                <small><p>${t.mainText}</p></small>
             </div>
             <p class="d-flex justify-content-between">
                 <a href="../examples/legal-pages-dummy/legal-notice.html">${t.legalNotice}</a>

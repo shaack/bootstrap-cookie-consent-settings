@@ -24,8 +24,8 @@ configuration is
 this.props = {
     autoShowDialog: true, // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
     lang: navigator.language, // the language, in which the modal is shown
-    languages: ["en", "de"], // supported languages (in ./content/), defaults to first in array
-    contentURL: "./content", // this URL must contain the dialogs content in the needed languages
+    languages: ["en", "de"], // supported languages (in ./cookie-consent-content/), defaults to first in array
+    contentURL: "./cookie-consent-content", // this URL must contain the dialogs cookie-consent-content in the needed languages
     cookieName: "cookie-consent-settings",  // the name of the cookie in which the configuration is stored as JSON
     cookieStorageDays: 365, // the duration the cookie configuration is stored on the client
     postSelectionCallback: undefined // callback function, called after the user has made his selection

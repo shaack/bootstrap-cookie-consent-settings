@@ -50,8 +50,7 @@
     </div>
     <h2 class="mt-4">More documentation</h2>
     <p class="mb-5"><a href="https://github.com/shaack/bootstrap-cookie-consent-settings">Find more documentation and
-        the sourcecode
-        on GitHub</a></p>
+        the sourcecode on GitHub</a></p>
 </div>
 <script src="../src/bootstrap-cookie-consent-settings.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
@@ -61,8 +60,8 @@
         crossorigin="anonymous"></script>
 
 <script>
-    var cookieSettings = new BootstrapCookieConsentSettings({
-        contentURL: "../content",
+    const cookieSettings = new BootstrapCookieConsentSettings({
+        contentURL: "../cookie-consent-content",
         postSelectionCallback: function () {
             location.reload() // reload after selection
         }
