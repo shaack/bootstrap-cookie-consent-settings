@@ -1,7 +1,7 @@
 {
   "name": "bootstrap-cookie-consent-settings",
   "version": "3.0.0",
-  "description": "Settings dialog in Bootstrap 4 and framework to handle the German and EU law (may 2020) about cookies in a website",
+  "description": "Settings dialog in Bootstrap 5 and framework to handle the EU law (may 2020) about cookies in a website",
   "browser": "./src/bootstrap-cookie-banner.js",
   "scripts": {
     "test": "echo \"No test specified\""
@@ -13,6 +13,7 @@
   "keywords": [
     "bootstrap",
     "cookie",
+    "consent",
     "eu",
     "gdpr",
     "dsgvo"

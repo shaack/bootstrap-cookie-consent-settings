@@ -17,10 +17,10 @@ function BootstrapCookieConsentSettings(props) {
         autoShowModal: true, // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
         postSelectionCallback: undefined, // callback function, called after the user has saved the settings
         lang: navigator.language, // the language, in which the modal is shown
-        defaultLang: "en", // default language, if the `lang` is not available as translation in `cookie-consent-content`
-        contentURL: "./cookie-consent-content", // this URL must contain the language-files in the needed languages (LANG.js) and the template.js
-        privacyPolicyUrl: "privacy-policy.html", // the URL of your privacy policy
-        legalNoticeUrl: "legal-notice.html", // the URL of you legal notice (Impressum)
+        defaultLang: "en", // default language, if `lang` is not available as translation in `cookie-consent-content`
+        contentURL: "./cookie-consent-content", // this URL must contain the language-files in the needed languages (`[lang].js`)
+        privacyPolicyUrl: "privacy-policy.html", // the URL of your privacy policy page
+        legalNoticeUrl: "legal-notice.html", // the URL of you legal notice page (Impressum)
         categories: ["necessary", "statistics", "marketing", "personalization"], // the categories for selection, must be contained in the language files
         cookieName: "cookie-consent-settings",  // the name of the cookie in which the configuration is stored as JSON
         cookieStorageDays: 365, // the duration the cookie configuration is stored on the client
@@ -35,7 +35,7 @@ function BootstrapCookieConsentSettings(props) {
         this.lang = this.lang.split("-")[0]
     }
 
-    // read cookie, and if it not fits the categories, remove it
+    // read the cookie, and if its content don't fits the categories, remove it
     const cookie = getCookie(this.props.cookieName)
     if(cookie) {
         const cookieContent = JSON.parse(cookie)
