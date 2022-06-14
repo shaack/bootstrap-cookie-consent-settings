@@ -66,7 +66,7 @@ It should return some JSON like
 }
 ```
 
-or `undefined`, before the user has choosen his cookie options.
+or `undefined`, before the user has chosen his cookie options.
 
 Read a specific cookie setting with
 
@@ -74,7 +74,7 @@ Read a specific cookie setting with
 cookieSettings.getSettings('statistics')
 ```
 
-for the `statistics` cookie settings. Also returns `undefined`, before the user has choosen his cookie options.
+for the `statistics` cookie settings. Also returns `undefined`, before the user has chosen his cookie options.
 
 ### Read the settings with a PHP script on the server
 
