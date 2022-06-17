@@ -99,7 +99,7 @@ function BootstrapCookieConsentSettings(props) {
             </div>
             <p class="d-flex justify-content-between">
                 ${linkLegalNotice}
-                <a href="#bccs-options" data-bs-toggle="collapse">Meine Einstellungen</a>
+                <a href="#bccs-options" data-bs-toggle="collapse">${self.content.mySettings}</a>
             </p>
             <div id="bccs-options" class="collapse">
                 ${optionsHtml}
