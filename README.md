@@ -76,20 +76,27 @@ cookieSettings.getSettings('statistics')
 
 for the `statistics` cookie settings. Also returns `undefined`, before the user has chosen his cookie options.
 
-### Read the settings with a PHP script on the server
+### Read the settings from the backend
 
-You can read the settings with all server languages, you just have to read the cookie and decode the JSON.
+You can read the settings with all server languages, you just have to read the cookie `cookie-consent-settings` 
+and decode the JSON.
 
-This is an PHP example how to read, if 'statistics' was allowed.
+#### PHP helper class
+
+With this package I provide a PHP helper class, which you can use to read and write the settings.
+
+It is located in `php/Shaack/BootstrapCookieConsentSettings.php`. 
+
+You can use it like this:
 
 ```PHP
-$consentCookieJson = @$_COOKIE['cookie-consent-settings'];
-if ($consentCookieJson) {
-    $consentCookie = json_decode($consentCookieJson);
-    if($consentCookie && $consentCookie->statistics) {
-        // do statistics things here
-    }
-}
+$cookieSettings = new \Shaack\BootstrapCookieConsentSettings();
+// read all settings
+$allSettings = $cookieSettings->getSettings();
+// read a specific setting
+$statisticsAllowed = $cookieSettings->getSetting("statistics");
+// write a specific setting
+$cookieSettings->setSetting("statistics", false);
 ```
 
 ### Internationalization
