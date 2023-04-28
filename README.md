@@ -14,7 +14,7 @@ about cookies in a website. Needs Bootstrap 5.
 Initialize the cookie consent framework with the constructor
 
 ```js
-var cookieSettings = new BootstrapCookieConsent(props)
+var cookieSettings = new BootstrapCookieConsentSettings(props)
 ```
 
 You should configure the framework with the `props` object, at least the properties `privacyPolicyUrl`, `legalNoticeUrl`
