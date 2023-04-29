@@ -26,10 +26,10 @@ function BootstrapCookieConsentSettings(props) {
         cookieStorageDays: 365, // the duration the cookie configuration is stored on the client
         modalId: "bootstrapCookieConsentSettingsModal" // the id of the modal dialog element
     }
-    if(!props.privacyPolicyUrl) {
+    if (!props.privacyPolicyUrl) {
         console.error("please set `privacyPolicyUrl` in the props of BootstrapCookieConsentSettings")
     }
-    if(!props.legalNoticeUrl) {
+    if (!props.legalNoticeUrl) {
         console.error("please set `legalNoticeUrl` in the props of BootstrapCookieConsentSettings")
     }
     for (const property in props) {
@@ -41,19 +41,27 @@ function BootstrapCookieConsentSettings(props) {
         this.lang = this.lang.split("-")[0]
     }
 
-    // read the cookie, and if its content don't fits the categories, remove it
-    const cookie = getCookie(this.props.cookieName)
-    if(cookie) {
-        const cookieContent = JSON.parse(cookie)
-        for (const category of this.props.categories) {
-            if(cookieContent[category] === undefined) {
-                console.log("cookie settings changed, removing settings cookie")
-                removeCookie(this.props.cookieName)
-                break
+    // read the cookie, and if its content does not fit the categories, remove it
+    const cookieContent = getCookie(this.props.cookieName)
+    if (cookieContent) {
+        try {
+            for (const category of this.props.categories) {
+                if (cookieContent[category] === undefined) {
+                    console.log("cookie settings changed, removing settings cookie")
+                    removeCookie(this.props.cookieName)
+                    break
+                }
             }
+        } catch (e) {
+            // problems with the cookie, remove it
+            console.warn("cookie settings changed, removing settings cookie", e)
+            removeCookie(this.props.cookieName)
         }
     }
 
+    /**
+     * Read the language file and render the modal
+     */
     fetchContent(self.lang, (result) => {
         self.content = JSON.parse(result)
         renderModal()
@@ -70,7 +78,7 @@ function BootstrapCookieConsentSettings(props) {
         let optionsHtml = ""
         for (const category of self.props.categories) {
             const categoryContent = self.content.categories[category]
-            if(!categoryContent) {
+            if (!categoryContent) {
                 console.error("no content for category", category, "found in language file", self.lang)
             }
             let descriptionList = ""
@@ -118,7 +126,7 @@ function BootstrapCookieConsentSettings(props) {
         </div>
     </div>
 </div>`
-        if (getCookie(self.props.cookieName) === undefined && self.props.autoShowModal) {
+        if (!getCookie(self.props.cookieName) && self.props.autoShowModal) {
             showDialog()
         }
     }
@@ -205,36 +213,35 @@ function BootstrapCookieConsentSettings(props) {
         }
     }
 
-    function gatherOptions(setAllExceptNecessary) {
-        const $options = self.$modal.find("#bccs-options .bccs-option")
+    function gatherOptions(setAllTo = undefined) {
         const options = {}
-        for (let i = 0; i < $options.length; i++) {
-            const option = $options[i]
-            const name = option.getAttribute("data-name")
-            if (name === "necessary") {
-                options[name] = true
-            } else if (setAllExceptNecessary === undefined) {
-                const $checkbox = $(option).find("input[type='checkbox']")
-                options[name] = $checkbox.prop("checked")
+        for (const category of self.props.categories) {
+            if(setAllTo === undefined) {
+                const checkbox = self.modal.querySelector("#bccs-checkbox-" + category)
+                if (!checkbox) {
+                    console.error("checkbox not found for category", category)
+                }
+                options[category] = checkbox.checked
             } else {
-                options[name] = !!setAllExceptNecessary
+                options[category] = setAllTo
             }
         }
+        options["necessary"] = true // necessary is necessary
         return options
     }
 
     function agreeAll() {
-        setCookie(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays)
+        setCookie(self.props.cookieName, gatherOptions(true), self.props.cookieStorageDays)
         self.$modal.modal("hide")
     }
 
     function doNotAgree() {
-        setCookie(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays)
+        setCookie(self.props.cookieName, gatherOptions(false), self.props.cookieStorageDays)
         self.$modal.modal("hide")
     }
 
     function saveSettings() {
-        setCookie(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays)
+        setCookie(self.props.cookieName, gatherOptions(), self.props.cookieStorageDays)
         self.$modal.modal("hide")
     }
 
@@ -252,7 +259,7 @@ function BootstrapCookieConsentSettings(props) {
                 }
             }
         }
-        request.onloadend = function() {
+        request.onloadend = function () {
             if (request.status === 404 && lang !== self.props.defaultLang) {
                 console.warn("language " + lang + " not found trying defaultLang " + self.props.defaultLang)
                 fetchContent(self.props.defaultLang, callback)
@@ -261,13 +268,14 @@ function BootstrapCookieConsentSettings(props) {
         request.send(null)
     }
 
-    function setCookie(name, value, days) {
+    function setCookie(name, object, days) {
         let expires = ""
         if (days) {
             const date = new Date()
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
             expires = "; expires=" + date.toUTCString()
         }
+        const value = new URLSearchParams(object).toString()
         document.cookie = name + "=" + (value || "") + expires + "; Path=/; SameSite=Strict;"
     }
 
@@ -280,21 +288,26 @@ function BootstrapCookieConsentSettings(props) {
                 c = c.substring(1, c.length)
             }
             if (c.indexOf(nameEQ) === 0) {
-                return c.substring(nameEQ.length, c.length)
+                const urlSearchParams = new URLSearchParams(c.substring(nameEQ.length, c.length))
+                const result = {}
+                for(const [key, value] of urlSearchParams) { // each 'entry' is a [key, value] tupple
+                    result[key] = value;
+                }
+                return result;
             }
         }
-        return undefined
+        return null
     }
 
     function removeCookie(name) {
         document.cookie = name + '=; Path=/; SameSite=Strict; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
     }
 
-    function documentReady(fn) {
+    function documentReady(callback) {
         if (document.readyState !== 'loading') {
-            fn()
+            callback()
         } else {
-            document.addEventListener('DOMContentLoaded', fn)
+            document.addEventListener('DOMContentLoaded', callback)
         }
     }
 
@@ -304,14 +317,13 @@ function BootstrapCookieConsentSettings(props) {
         showDialog()
     }
     this.getSettings = function (optionName) {
-        const cookie = getCookie(self.props.cookieName)
-        if (cookie) {
-            const settings = JSON.parse(cookie)
+        const cookieContent = getCookie(self.props.cookieName)
+        if (cookieContent) {
             if (optionName === undefined) {
-                return settings
+                return cookieContent
             } else {
-                if (settings) {
-                    return settings[optionName]
+                if (cookieContent) {
+                    return cookieContent[optionName]
                 } else {
                     return false
                 }
