@@ -1,11 +1,10 @@
 <?php
+namespace Shaack;
 
 /**
  * Helper class, to handle the `bootstrap-cookie-content-settings` from a PHP backend.
  * @author Stefan Haack (https://shaack.com)
  */
-namespace Shaack;
-
 class BootstrapCookieConsentSettings {
 
     private string $cookieName;

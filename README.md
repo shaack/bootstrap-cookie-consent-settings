@@ -41,7 +41,9 @@ this.props = {
 
 ### Show dialog
 
-On a new visit the dialog is shown automatically. For reconfiguration show the Dialog again with
+On a new visit the dialog is shown automatically. 
+
+To allow the user a reconfiguration you can show the Dialog again with
 
 ```js
 cookieSettings.showDialog()
