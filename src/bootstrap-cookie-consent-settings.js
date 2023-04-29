@@ -133,55 +133,54 @@ function BootstrapCookieConsentSettings(props) {
 
     function showDialog() {
         documentReady(function () {
-            self.modal = document.getElementById(self.props.modalId)
-            if (!self.modal) {
-                self.modal = document.createElement("div")
-                self.modal.id = self.props.modalId
-                self.modal.setAttribute("class", "modal fade")
-                self.modal.setAttribute("tabindex", "-1")
-                self.modal.setAttribute("role", "dialog")
-                self.modal.setAttribute("aria-labelledby", self.props.modalId)
-                self.modal.innerHTML = self.modalContent
-                document.body.append(self.modal)
-                self.$modal = $(self.modal)
+            self.modalElement = document.getElementById(self.props.modalId)
+            if (!self.modalElement) {
+                self.modalElement = document.createElement("div")
+                self.modalElement.id = self.props.modalId
+                self.modalElement.setAttribute("class", "modal fade")
+                self.modalElement.setAttribute("tabindex", "-1")
+                self.modalElement.setAttribute("role", "dialog")
+                self.modalElement.setAttribute("aria-labelledby", self.props.modalId)
+                self.modalElement.innerHTML = self.modalContent
+                document.body.append(self.modalElement)
                 if (self.props.postSelectionCallback) {
-                    self.$modal.on("hidden.bs.modal", function () {
+                    self.modalElement.addEventListener("hidden.bs.modal", function () {
                         self.props.postSelectionCallback()
                     })
                 }
-                self.$modal.modal({
+                self.modal = new bootstrap.Modal(self.modalElement, {
                     backdrop: "static",
                     keyboard: false
                 })
-
-                self.$modal.modal("show")
-                self.$buttonDoNotAgree = $("#bccs-buttonDoNotAgree")
-                self.$buttonAgree = $("#bccs-buttonAgree")
-                self.$buttonSave = $("#bccs-buttonSave")
-                self.$buttonAgreeAll = $("#bccs-buttonAgreeAll")
+                self.modal.show()
+                self.buttonDoNotAgree = self.modalElement.querySelector("#bccs-buttonDoNotAgree")
+                self.buttonAgree = self.modalElement.querySelector("#bccs-buttonAgree")
+                self.buttonSave = self.modalElement.querySelector("#bccs-buttonSave")
+                self.buttonAgreeAll = self.modalElement.querySelector("#bccs-buttonAgreeAll")
                 updateButtons()
                 updateOptionsFromCookie()
-                $("#bccs-options").on("hide.bs.collapse", function () {
+                self.modalElement.querySelector("#bccs-options").addEventListener("hide.bs.collapse", function () {
                     detailedSettingsShown = false
                     updateButtons()
-                }).on("show.bs.collapse", function () {
+                })
+                self.modalElement.querySelector("#bccs-options").addEventListener("show.bs.collapse", function () {
                     detailedSettingsShown = true
                     updateButtons()
                 })
-                self.$buttonDoNotAgree.click(function () {
+                self.buttonDoNotAgree.addEventListener("click", function () {
                     doNotAgree()
                 })
-                self.$buttonAgree.click(function () {
+                self.buttonAgree.addEventListener("click", function () {
                     agreeAll()
                 })
-                self.$buttonSave.click(function () {
+                self.buttonSave.addEventListener("click", function () {
                     saveSettings()
                 })
-                self.$buttonAgreeAll.click(function () {
+                self.buttonAgreeAll.addEventListener("click", function () {
                     agreeAll()
                 })
             } else {
-                self.$modal.modal("show")
+                self.modal.show()
             }
         }.bind(this))
     }
@@ -190,26 +189,26 @@ function BootstrapCookieConsentSettings(props) {
         const settings = self.getSettings()
         if (settings) {
             for (let setting in settings) {
-                const $checkbox = self.$modal.find("#bccs-options .bccs-option[data-name='" + setting + "'] input[type='checkbox']")
-                $checkbox.prop("checked", settings[setting])
+                const checkboxElement = self.modalElement.querySelector("#bccs-checkbox-" + setting)
+                checkboxElement.checked = settings[setting] === "true"
             }
         }
-        const $checkboxNecessary = self.$modal.find("#bccs-options .bccs-option[data-name='necessary'] input[type='checkbox']")
-        $checkboxNecessary.prop("checked", true)
-        $checkboxNecessary.prop("disabled", true)
+        const checkboxNecessary = self.modalElement.querySelector("#bccs-checkbox-necessary")
+        checkboxNecessary.checked = true
+        checkboxNecessary.disabled = true
     }
 
     function updateButtons() {
         if (detailedSettingsShown) {
-            self.$buttonDoNotAgree.hide()
-            self.$buttonAgree.hide()
-            self.$buttonSave.show()
-            self.$buttonAgreeAll.show()
+            self.buttonDoNotAgree.style.display = "none"
+            self.buttonAgree.style.display = "none"
+            self.buttonSave.style.removeProperty("display")
+            self.buttonAgreeAll.style.removeProperty("display")
         } else {
-            self.$buttonDoNotAgree.show()
-            self.$buttonAgree.show()
-            self.$buttonSave.hide()
-            self.$buttonAgreeAll.hide()
+            self.buttonDoNotAgree.style.removeProperty("display")
+            self.buttonAgree.style.removeProperty("display")
+            self.buttonSave.style.display = "none"
+            self.buttonAgreeAll.style.display = "none"
         }
     }
 
@@ -217,7 +216,7 @@ function BootstrapCookieConsentSettings(props) {
         const options = {}
         for (const category of self.props.categories) {
             if(setAllTo === undefined) {
-                const checkbox = self.modal.querySelector("#bccs-checkbox-" + category)
+                const checkbox = self.modalElement.querySelector("#bccs-checkbox-" + category)
                 if (!checkbox) {
                     console.error("checkbox not found for category", category)
                 }
@@ -232,17 +231,17 @@ function BootstrapCookieConsentSettings(props) {
 
     function agreeAll() {
         setCookie(self.props.cookieName, gatherOptions(true), self.props.cookieStorageDays)
-        self.$modal.modal("hide")
+        self.modal.hide()
     }
 
     function doNotAgree() {
         setCookie(self.props.cookieName, gatherOptions(false), self.props.cookieStorageDays)
-        self.$modal.modal("hide")
+        self.modal.hide()
     }
 
     function saveSettings() {
         setCookie(self.props.cookieName, gatherOptions(), self.props.cookieStorageDays)
-        self.$modal.modal("hide")
+        self.modal.hide()
     }
 
     function fetchContent(lang, callback) {
