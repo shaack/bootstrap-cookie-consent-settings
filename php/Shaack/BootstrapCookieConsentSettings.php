@@ -22,10 +22,9 @@ class BootstrapCookieConsentSettings {
      */
     public function getSettings() : array {
         parse_str(@$_COOKIE[$this->cookieName], $array);
-        $array = array_map(function($value) {
+        return array_map(function($value) {
             return $value === "true";
         }, $array);
-        return $array;
     }
 
     /**
