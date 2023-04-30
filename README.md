@@ -80,16 +80,20 @@ for the `statistics` cookie settings. Also returns `undefined`, before the user 
 
 ### Read the settings from the backend
 
-You can read the settings with all server languages, you just have to read the cookie `cookie-consent-settings` 
-and decode the JSON.
+You can read the settings with all server languages, you just have to read the cookie `cookie-consent-settings`. 
+The content of the cookie is encoded like a http query string. 
+
+``` 
+necessary=true&statistics=false&marketing=true&personalization=true
+```
 
 #### PHP helper class
 
-With this package I provide a PHP helper class, which you can use to read and write the settings.
+I provide a PHP helper class that you can use to read and write the settings from a PHP backend.
 
 It is located in `php/Shaack/BootstrapCookieConsentSettings.php`. 
 
-You can use it like this:
+You can use it like described in the following example.
 
 ```PHP
 $cookieSettings = new \Shaack\BootstrapCookieConsentSettings();
