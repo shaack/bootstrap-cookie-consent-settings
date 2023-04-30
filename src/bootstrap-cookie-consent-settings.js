@@ -289,7 +289,7 @@ function BootstrapCookieConsentSettings(props) {
             if (c.indexOf(nameEQ) === 0) {
                 const urlSearchParams = new URLSearchParams(c.substring(nameEQ.length, c.length))
                 const result = {}
-                for(const [key, value] of urlSearchParams) { // each 'entry' is a [key, value] tupple
+                for(const [key, value] of urlSearchParams) {
                     result[key] = value;
                 }
                 return result;

@@ -22,7 +22,10 @@ class BootstrapCookieConsentSettings {
      */
     public function getSettings() : array {
         parse_str(@$_COOKIE[$this->cookieName], $array);
-        return $array ?? [];
+        $array = array_map(function($value) {
+            return $value === "true";
+        }, $array);
+        return $array;
     }
 
     /**
@@ -41,7 +44,9 @@ class BootstrapCookieConsentSettings {
      */
     public function setSettings(array $settings) : void {
         $settings["necessary"] = true;
-        $encoded = http_build_query($settings, "", "&");
+        $encoded = http_build_query(array_map(function($value) {
+            return $value ? "true" : "false";
+        },$settings), "", "&");
         setrawcookie($this->cookieName, $encoded, time() + (86400 * $this->cookieStorageDays), "/");
     }
 
