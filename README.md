@@ -93,7 +93,7 @@ I provide a PHP helper class that you can use to read and write the settings fro
 
 It is located in `php/Shaack/BootstrapCookieConsentSettings.php`. 
 
-You can use it like described in the following example.
+You can use it as described in the following example.
 
 ```PHP
 $cookieSettings = new \Shaack\BootstrapCookieConsentSettings();
