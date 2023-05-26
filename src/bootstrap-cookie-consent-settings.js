@@ -215,7 +215,7 @@ function BootstrapCookieConsentSettings(props) {
     function gatherOptions(setAllTo = undefined) {
         const options = {}
         for (const category of self.props.categories) {
-            if(setAllTo === undefined) {
+            if (setAllTo === undefined) {
                 const checkbox = self.modalElement.querySelector("#bccs-checkbox-" + category)
                 if (!checkbox) {
                     console.error("checkbox not found for category", category)
@@ -289,10 +289,10 @@ function BootstrapCookieConsentSettings(props) {
             if (c.indexOf(nameEQ) === 0) {
                 const urlSearchParams = new URLSearchParams(c.substring(nameEQ.length, c.length))
                 const result = {}
-                for(const [key, value] of urlSearchParams) {
-                    result[key] = value;
+                for (const [key, value] of urlSearchParams) {
+                    result[key] = value
                 }
-                return result;
+                return result
             }
         }
         return null
@@ -311,7 +311,6 @@ function BootstrapCookieConsentSettings(props) {
     }
 
     // API
-
     this.showDialog = function () {
         showDialog()
     }
@@ -330,5 +329,10 @@ function BootstrapCookieConsentSettings(props) {
         } else {
             return undefined
         }
+    }
+    this.setSetting = function (name, value) {
+        const settings = self.getSettings()
+        settings[name] = value
+        setCookie(self.props.cookieName, settings, self.props.cookieStorageDays)
     }
 }
