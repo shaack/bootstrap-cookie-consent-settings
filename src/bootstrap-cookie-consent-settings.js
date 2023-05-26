@@ -331,7 +331,12 @@ function BootstrapCookieConsentSettings(props) {
         }
     }
     this.setSetting = function (name, value) {
-        const settings = self.getSettings()
+        let settings = self.getSettings() || {}
+        for (const category of this.props.categories) {
+            if(settings[category] === undefined) {
+                settings[category] = true
+            }
+        }
         settings[name] = value
         setCookie(self.props.cookieName, settings, self.props.cookieStorageDays)
     }
