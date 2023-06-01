@@ -22,13 +22,14 @@ and `contentURL`. The default configuration is
 
 ```js
 this.props = {
-    privacyPolicyUrl: undefined, // the URL of your privacy policy page (required)
-    legalNoticeUrl: undefined, // the URL of you legal notice page (required)
+    privacyPolicyUrl: undefined, // the URL of your privacy policy page
+    legalNoticeUrl: undefined, // the URL of you legal notice page (Impressum)
     contentURL: "/cookie-consent-content", // this folder must contain the language-files in the needed languages (`[lang].js`)
     buttonAgreeClass: "btn btn-primary", // the "Agree to all" buttons class
     buttonDontAgreeClass: "btn btn-link text-decoration-none", // the "I do not agree" buttons class
     buttonSaveClass: "btn btn-secondary", // the "Save selection" buttons class
     autoShowModal: true, // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
+    alsoUseLocalStorage: true, // if true, the settings are stored in localStorage, too
     postSelectionCallback: undefined, // callback function, called after the user has saved the settings
     lang: navigator.language, // the language, in which the modal is shown
     defaultLang: "en", // default language, if `lang` is not available as translation in `cookie-consent-content`
