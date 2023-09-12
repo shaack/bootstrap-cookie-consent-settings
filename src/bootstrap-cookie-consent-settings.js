@@ -106,7 +106,7 @@ function BootstrapCookieConsentSettings(props) {
             <div class="bccs-body-text" style="font-size: 80%">
                 <p>${self.content.body}</p>
             </div>
-            <p class="d-flex justify-content-between">
+            <p class="d-flex justify-content-between mb-0">
                 ${linkLegalNotice}
                 <a href="#bccs-options" data-bs-toggle="collapse">${self.content.mySettings}</a>
             </p>
