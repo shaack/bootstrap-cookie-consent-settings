@@ -111,7 +111,9 @@ function BootstrapCookieConsentSettings(props) {
                 <a href="#bccs-options" data-bs-toggle="collapse">${self.content.mySettings}</a>
             </p>
             <div id="bccs-options" class="collapse">
-                ${optionsHtml}
+                <div class="mt-4">
+                    ${optionsHtml}
+                </div>
             </div>
         </div>
         <div class="modal-footer">
