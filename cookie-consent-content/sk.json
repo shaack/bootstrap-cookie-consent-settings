@@ -1,0 +1,31 @@
+{
+  "title": "Nastavenia ochrany osobných údajov",
+  "body": "Používame cookies a podobné technológie, ktoré sú nevyhnutné na prevádzku webovej stránky. Ďalšie súbory cookie sa používajú iba s vaším súhlasom. Svoj súhlas môžete kedykoľvek udeliť, odmietnuť alebo odvolať pomocou odkazu \"nastavenia súborov cookie\" v spodnej časti každej stránky. Kliknutím na \"Súhlasím\" môžete súhlasiť s naším používaním súborov cookie. Ďalšie informácie o tom, aké informácie sa zhromažďujú a ako sa zdieľajú s našimi partnermi, nájdete v našich --privacy-policy--.",
+  "privacyPolicy": "Vyhlásenie o ochrane údajov",
+  "legalNotice": "Právne upozornenie",
+  "mySettings": "Moje nastavenia",
+  "buttonNotAgree": "Nesúhlasím",
+  "buttonAgree": "Súhlasím",
+  "buttonSaveSelection": "Uložiť výber",
+  "buttonAgreeAll": "Súhlas so všetkým",
+  "categories": {
+    "necessary": {
+      "title": "Nevyhnutné",
+      "description": ["Vyžaduje sa na spustenie webovej stránky"]
+    },
+    "statistics": {
+      "title": "Štatistiky",
+      "description": ["Monitorovanie používania webových stránok a optimalizácia používateľskej skúsenosti"]
+    },
+    "marketing": {
+      "title": "Marketing",
+      "description": ["Hodnotenie marketingových akcií"]
+    },
+    "personalization": {
+      "title": "Personalizácia",
+      "description": ["Ukladanie vašich preferencií z predchádzajúcich návštev",
+        "Zhromažďovanie spätnej väzby od používateľov na zlepšenie našej webovej stránky",
+        "Zaznamenávanie vašich záujmov s cieľom poskytnúť prispôsobený obsah a ponuky"]
+    }
+  }
+}
