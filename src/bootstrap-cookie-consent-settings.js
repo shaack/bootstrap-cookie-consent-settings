@@ -193,7 +193,11 @@ function BootstrapCookieConsentSettings(props) {
         if (settings) {
             for (let setting in settings) {
                 const checkboxElement = self.modalElement.querySelector("#bccs-checkbox-" + setting)
-                checkboxElement.checked = settings[setting] === "true"
+                try {
+                    checkboxElement.checked = settings[setting] === "true"
+                } catch (e) {
+                    console.warn("error updating settings", setting, "from cookie", e)
+                }
             }
         }
         const checkboxNecessary = self.modalElement.querySelector("#bccs-checkbox-necessary")
