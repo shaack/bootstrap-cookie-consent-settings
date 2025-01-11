@@ -3,6 +3,8 @@
 A modal dialog (cookie banner) and framework to handle the EU law (as written by EuGH, 1.10.2019 – C-673/17)
 about cookies in a website. Needs Bootstrap 5.
 
+## References
+
 - [Demo page](https://shaack.com/projekte/bootstrap-cookie-consent-settings)
 - [GitHub Repository](https://github.com/shaack/bootstrap-cookie-consent-settings)
 - [npm package](https://www.npmjs.com/package/bootstrap-cookie-consent-settings)
@@ -118,4 +120,7 @@ You can use this banner for your website free of charge under the [MIT-License](
 The banner and framework was designed in cooperation with data protection officers and lawyers. However, we can not
 guarantee whether the banner is correct for your website and assume no liability for its use.
 
-bootstrap-cookie-consent-settings is a project of [shaack.com](https://shaack.com).
+---
+
+Find more high quality modules from [shaack.com](https://shaack.com)
+on [our projects page](https://shaack.com/works).
