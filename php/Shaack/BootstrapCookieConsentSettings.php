@@ -21,7 +21,11 @@ class BootstrapCookieConsentSettings {
      * @return array
      */
     public function getSettings() : array {
-        parse_str(@$_COOKIE[$this->cookieName], $array);
+        $cookieValue = $_COOKIE[$this->cookieName] ?? "";
+        $array = [];
+        if (!empty($cookieValue)) {
+            parse_str($cookieValue, $array);
+        }
         return array_map(function($value) {
             return $value === "true";
         }, $array);
@@ -32,8 +36,9 @@ class BootstrapCookieConsentSettings {
      * @param string $optionName
      * @return bool
      */
-    public function getSetting(string $optionName) : bool {
-        return !!$this->getSettings()[$optionName];
+    public function getSetting(string $optionName): bool {
+        $settings = $this->getSettings();
+        return $settings[$optionName] ?? false;
     }
 
     /**
