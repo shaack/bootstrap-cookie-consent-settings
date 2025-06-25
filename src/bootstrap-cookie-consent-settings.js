@@ -18,7 +18,7 @@ function BootstrapCookieConsentSettings(props) {
         buttonDontAgreeClass: "btn btn-link text-decoration-none", // the "I do not agree" buttons class
         buttonSaveClass: "btn btn-secondary", // the "Save selection" buttons class
         autoShowModal: true, // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
-        alsoUseLocalStorage: true, // if true, the settings are stored in localStorage, too
+        alsoUseLocalStorage: false, // if true, the settings are also stored in localStorage
         postSelectionCallback: undefined, // callback function, called after the user has saved the settings
         lang: navigator.language, // the language, in which the modal is shown
         defaultLang: "en", // default language, if `lang` is not available as translation in `cookie-consent-content`
@@ -283,8 +283,9 @@ function BootstrapCookieConsentSettings(props) {
         }
         const value = new URLSearchParams(object).toString()
         document.cookie = name + "=" + (value || "") + expires + "; Path=/; SameSite=Strict;"
-        // store value also in localStorage
-        localStorage.setItem(name, value)
+        if(props.alsoUseLocalStorage) {
+            localStorage.setItem(name, value)
+        }
     }
 
     function getCookie(name) {
@@ -304,16 +305,17 @@ function BootstrapCookieConsentSettings(props) {
                 return result
             }
         }
-        // if cookie not found, try localStorage
-        const value = localStorage.getItem(name)
-        if (value) {
-            const urlSearchParams = new URLSearchParams(value)
-            const result = {}
-            for (const [key, value] of urlSearchParams) {
-                result[key] = value
+        if(props.alsoUseLocalStorage) {
+            const value = localStorage.getItem(name)
+            if (value) {
+                const urlSearchParams = new URLSearchParams(value)
+                const result = {}
+                for (const [key, value] of urlSearchParams) {
+                    result[key] = value
+                }
+                setCookie(name, result, self.props.cookieStorageDays)
+                return result
             }
-            setCookie(name, result, self.props.cookieStorageDays)
-            return result
         }
         return null
     }
